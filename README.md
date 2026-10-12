@@ -6,6 +6,8 @@ An evidence-based Windows optimization toolkit built as a single PowerShell scri
 It audits, explains, optimizes — and can undo every change it makes.
 
 > **Core rule:** no blind tweaks. Every optimization is measured, verified after application, and reversible.
+>
+> **In short:** audit → preview → apply → restart → measure → undo anytime.
 
 ## 1. Overview & Philosophy
 
@@ -93,6 +95,21 @@ After each key step, Apply re-reads the setting and confirms the value actually 
 4. If PowerShell blocks the script, allow local scripts for your user once: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` — or run it with `powershell -ExecutionPolicy Bypass -File .\optimize.ps1` instead.
 5. First runs are safe and read-only: try `-Mode Report`, then `-Mode Audit`, then `-Mode WhatIf -Preset Gaming`. None of them change the system or require administrator rights.
 6. Only when you are satisfied with the preview, open an **elevated** PowerShell (Run as administrator) and run Apply or Rollback.
+
+### The typical workflow (what to run, when and why)
+
+1. **Report** — `.\optimize.ps1` — a quick console overview of the system. Safe, changes nothing. *When: the very first launch.*
+2. **Audit** — `.\optimize.ps1 -Mode Audit` — deep diagnostics with 19 rules; saves JSON + HTML reports. *When: right after Report, to see what is actually suboptimal.*
+3. **WhatIf** — `.\optimize.ps1 -Mode WhatIf -Preset Gaming` — lists every step that would be applied, with plain descriptions. Changes nothing. *When: before any Apply run.*
+4. **Apply** — `.\optimize.ps1 -Mode Apply -Preset Gaming` *(elevated)* — applies the preset with backups, per-step verification and a before/after benchmark. *When: the preview looks right to you.*
+5. **Restart the PC** — many changes only take effect after a reboot.
+6. **Compare** — `.\optimize.ps1 -Mode Compare` — compares current metrics with the baseline taken before Apply. *When: after the reboot, or any time later.*
+7. **Audit again** — confirm the findings you cared about are gone.
+8. **Rollback** — `.\optimize.ps1 -Mode Rollback` *(elevated)* — restores every recorded original value. *When: something feels wrong, or you simply want everything back.*
+
+Any time, independently of the workflow:
+- `Startup` / `Components` — manage autostart entries and Windows components.
+- `Repair` — if you suspect corrupted system files (or an audit points at servicing issues).
 
 ```powershell
 # Preview what would happen — nothing is changed
