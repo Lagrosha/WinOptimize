@@ -85,6 +85,15 @@ WinOptimize построен на трёх принципах:
 
 ## 4. Быстрый старт и примеры
 
+### После скачивания
+
+1. Получите файлы: `git clone https://github.com/Lagrosha/WinOptimize.git` — или скачайте только `optimize.ps1` с этой страницы.
+2. Откройте **Windows PowerShell** (версия 5.1+, встроен в Windows 10/11).
+3. Перейдите в папку со скриптом: `cd C:\путь\к\WinOptimize`.
+4. Если PowerShell блокирует запуск скрипта, один раз разрешите локальные скрипты для своего пользователя: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` — либо запускайте так: `powershell -ExecutionPolicy Bypass -File .\optimize.ps1`.
+5. Первые запуски безопасны и ничего не меняют: попробуйте `-Mode Report`, затем `-Mode Audit`, затем `-Mode WhatIf -Preset Gaming`. Они не требуют прав администратора.
+6. Только когда превью вас устроит, откройте PowerShell **от имени администратора** и запускайте Apply или Rollback.
+
 ```powershell
 # Превью того, что произойдёт — ничего не изменяется
 .\optimize.ps1 -Mode WhatIf -Preset Gaming

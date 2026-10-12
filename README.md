@@ -85,6 +85,15 @@ After each key step, Apply re-reads the setting and confirms the value actually 
 
 ## 4. Quick Start / Usage Examples
 
+### After downloading
+
+1. Get the files: `git clone https://github.com/Lagrosha/WinOptimize.git` — or download just `optimize.ps1` from this page.
+2. Open **Windows PowerShell** (version 5.1+, built into Windows 10/11).
+3. Go to the folder with the script: `cd C:\path\to\WinOptimize`.
+4. If PowerShell blocks the script, allow local scripts for your user once: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` — or run it with `powershell -ExecutionPolicy Bypass -File .\optimize.ps1` instead.
+5. First runs are safe and read-only: try `-Mode Report`, then `-Mode Audit`, then `-Mode WhatIf -Preset Gaming`. None of them change the system or require administrator rights.
+6. Only when you are satisfied with the preview, open an **elevated** PowerShell (Run as administrator) and run Apply or Rollback.
+
 ```powershell
 # Preview what would happen — nothing is changed
 .\optimize.ps1 -Mode WhatIf -Preset Gaming
